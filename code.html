@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerShell Parancsok - Jegyzet</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+        integrity="sha512-vswe+cgvic/XBoF+D4BbGlmma+T0ZW1Znlm6IH0y8hSdFe59+z8+Cg69GV+o/vFYDW06j6kscdaGekf0fksllHl0jHZI6/pCqR4Gq5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .code-block {
+            position: relative;
+            background-color: #282c34;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #abb2bf;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #282c34;
+            border: none;
+            color: #abb2bf;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .copy-button:hover {
+            background-color: #404652;
+        }
+
+        .code-block pre {
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .code-block pre code {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            display: block;
+            color: #abb2bf;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>PowerShell Parancsok - Jegyzet</h1>
+
+        <div class="program">
+            <h2>Alapok</h2>
+            <p>Alapvető parancsok és szintaxis.</p>
+
+            <h3>Szöveg kiírása</h3>
+            <p><code>echo "szöveg"</code>: Kiírja a megadott szöveget a konzolra.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+echo "Hello World"  # Kimenet: Hello World
+                </code></pre>
+            </div>
+
+            <h3>Változók</h3>
+            <p><code>$változóNév = érték</code>: Változó deklarálása és értékadás.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$myVar = 10
+echo $myVar  # Kimenet: 10
+                </code></pre>
+            </div>
+
+            <h3>Változó növelése</h3>
+            <p><code>$változóNév++</code>: Növeli a változó értékét 1-gyel.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$myVar = 5
+$myVar++
+echo $myVar  # Kimenet: 6
+                </code></pre>
+            </div>
+
+            <h3>Megjegyzés</h3>
+            <p><code>#</code>: Egysoros megjegyzés. A <code>#</code> jel utáni rész nem kerül végrehajtásra.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+# Ez egy megjegyzés
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Argumentumok kezelése</h2>
+            <p><code>$args</code>: A szkriptnek átadott parancssori argumentumokat tartalmazó tömb.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+# args.ps1 10 20
+echo $args[0]  # Kimenet: 10
+echo $args[1]  # Kimenet: 20
+echo $args.Count  # Kimenet: 2
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Feltételes elágazások (if-else)</h2>
+            <p>Feltételek alapján történő vezérlés.</p>
+            <ul>
+                <li><code>if (feltétel) { parancsok }</code>: Ha a feltétel igaz, a kapcsos zárójelek közötti parancsok végrehajtásra kerülnek.</li>
+                <li><code>elseif (feltétel) { parancsok }</code>: További feltételek megadására szolgál.</li>
+                <li><code>else { parancsok }</code>: Ha egyik feltétel sem igaz, az <code>else</code> ágban lévő parancsok hajtódnak végre.</li>
+            </ul>
+            <h3>Összehasonlító operátorok:</h3>
+            <ul>
+                <li><code>-eq</code>: egyenlő</li>
+                <li><code>-ne</code>: nem egyenlő</li>
+                <li><code>-gt</code>: nagyobb, mint</li>
+                <li><code>-ge</code>: nagyobb vagy egyenlő</li>
+                <li><code>-lt</code>: kisebb, mint</li>
+                <li><code>-le</code>: kisebb vagy egyenlő</li>
+            </ul>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$num = 15
+
+if ($num -gt 10) {
+    echo "A szám nagyobb, mint 10"
+} elseif ($num -eq 10) {
+    echo "A szám egyenlő 10-zel"
+} else {
+    echo "A szám kisebb, mint 10"
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Ciklusok (for)</h2>
+            <p><code>for ($i = kezdőérték; $i -le végérték; $i++) { parancsok }</code>: A ciklusváltozó (`$i`) a kezdőértéktől indul, a megadott lépésközzel (`$i++`) növekszik a végértékig, és minden ciklusban végrehajtja a kapcsos zárójelek közötti parancsokat.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+for ($i = 0; $i -le 5; $i++) {
+    echo "i = $i"
+}
+# Kimenet:
+# i = 0
+# i = 1
+# i = 2
+# i = 3
+# i = 4
+# i = 5
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Objektumok</h2>
+            <p><code>[PSCustomObject]@{ Tulajdonság1 = "Érték1"; Tulajdonság2 = "Érték2" }</code>: Egyéni objektum létrehozása.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$person = [PSCustomObject]@{
+    Name = "John Doe"
+    Age = 30
+}
+echo $person.Name  # Kimenet: John Doe
+echo $person.Age  # Kimenet: 30
+                </code></pre>
+            </div>
+
+            <h3>Objektumok tömbje</h3>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$people = @(
+    [PSCustomObject]@{ Name = "Alice"; Age = 25 }
+    [PSCustomObject]@{ Name = "Bob"; Age = 35 }
+)
+echo $people[0].Name  # Kimenet: Alice
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Parancsok objektumok kezelésére</h2>
+            <h3><code>Write-Host</code></h3>
+            <p>Kiírja az objektum tulajdonságait formázva.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$person = [PSCustomObject]@{ Name = "John"; Age = 30 }
+Write-Host "Name: $($person.Name), Age: $($person.Age)"
+# Kimenet: Name: John, Age: 30
+                </code></pre>
+            </div>
+
+            <h3><code>Sort-Object</code></h3>
+            <p>Objektumok rendezése adott tulajdonság alapján. <code>-Descending</code>: Csökkenő sorrend.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$people | Sort-Object Age -Descending
+# Az objektumokat az Age tulajdonság alapján rendezi csökkenő sorrendben.
+                </code></pre>
+            </div>
+
+            <h3><code>Select-Object</code></h3>
+            <p>Objektumok bizonyos tulajdonságainak kiválasztása.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$people | Select-Object Name, Age
+# Csak a Name és Age tulajdonságokat adja vissza.
+                </code></pre>
+            </div>
+
+            <h3><code>Measure-Object</code></h3>
+            <p>Objektumok számlálása, összegzése, átlagolása. <code>-Line</code>: Sorok számlálása. <code>-Count</code>: Elemek számlálása.
+                <code>-ExpandProperty</code>: Tulajdonság értékének lekérése.
+            </p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+# A numbers.txt fájl sorainak száma:
+Get-Content .\numbers.txt | Measure-Object -Line | Select-Object -ExpandProperty Lines
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Fájlkezelés</h2>
+            <h3><code>Get-Content</code></h3>
+            <p>Fájl tartalmának beolvasása.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$fileContent = Get-Content "myFile.txt"
+echo $fileContent # Kiírja a fájl tartalmát
+                </code></pre>
+            </div>
+
+            <h3><code>Test-Path</code></h3>
+            <p>Fájl vagy mappa létezésének ellenőrzése. <code>-PathType Leaf</code>: Fájl létezését ellenőrzi.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+if (Test-Path "myFile.txt" -PathType Leaf) {
+    echo "A fájl létezik"
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Stringkezelés</h2>
+            <p><code>.Split("elválasztó")</code>: Szöveg feldarabolása egy elválasztó karakter mentén.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$line = "apple banana orange"
+$words = $line.Split(" ")
+echo $words[1]  # Kimenet: banana
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Függvények</h2>
+            <p><code>function FüggvényNév { parancsok }</code>: Függvény definiálása.</p>
+            <p><code>param([típus]$paraméternév)</code>: Paraméter definiálása a függvényen belül.</p>
+            <p><code>FüggvényNév -paraméternév érték</code>: Függvényhívás paraméterátadással.</p>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+function Greet {
+    param (
+        [string]$name
+    )
+    echo "Hello, $name!"
+}
+
+Greet -name "Peter"  # Kimenet: Hello, Peter!
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Matematikai műveletek</h2>
+            <ul>
+                <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>: Összeadás, kivonás, szorzás, osztás.</li>
+                <li><code>[math]::Sqrt(szám)</code>: Négyzetgyökvonás.</li>
+            </ul>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$sum = 10 + 5  # Kimenet: 15
+$diff = 10 - 5 # Kimenet: 5
+$prod = 10 * 5 # Kimenet: 50
+$quot = 10 / 5 # Kimenet: 2
+$sqrt = [math]::Sqrt(9)  # Kimenet: 3
+                </code></pre>
+            </div>
+            <h3>Másodfokú egyenlet megoldása</h3>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$a = [double](Read-Host "Enter the coefficient 'a'")
+$b = [double](Read-Host "Enter the coefficient 'b'")
+$c = [double](Read-Host "Enter the coefficient 'c'")
+
+$discriminant = $b * $b - 4 * $a * $c
+
+if ($discriminant -gt 0) {
+    $x1 = (-$b + [math]::sqrt($discriminant)) / (2 * $a)
+    $x2 = (-$b - [math]::sqrt($discriminant)) / (2 * $a)
+    echo $x1
+    echo $x2
+}
+elseif ($discriminant -eq 0) {
+    $x1 = -$b / (2 * $a)
+    echo $x1
+}
+else {
+    echo "Nincs valos megoldas"
+}
+</code></pre>
+            </div>
+        </div>
+        <div class="program">
+            <h2>Prímteszt függvény</h2>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+function Test-Prime {
+    param ( [int]$number )
+
+    if ($number -le 1) { return $false } # 0, 1 nem prímek
+    if ($number -le 3) { return $true }  # 2 és 3 prímek
+
+    if ($number % 2 -eq 0 -or $number % 3 -eq 0) { return $false } # Osztható 2-vel vagy 3-mal
+
+    for ($i = 5; $i * $i -le $number; $i += 6) { # Optimalizált ciklus
+        if ($number % $i -eq 0 -or $number % ($i + 2) -eq 0) {
+             return $false
+        }
+    }
+
+    return $true
+}
+
+Test-Prime -number 23 # Kimenet: True
+Test-Prime -number 24 # Kimenet: False
+</code></pre>
+            </div>
+        </div>
+        <div class="program">
+            <h2>Sorok megfordítása fájlban</h2>
+            <div class="code-block">
+                <button class="copy-button btn">Másolás</button>
+                <pre><code class="language-powershell">
+$filePath = "input.txt"
+$lines = Get-Content $filepath
+
+for ($i = $lines.Count - 1; $i -ge 0; $i--) {
+    echo $lines[$i]
+}
+</code></pre>
+            </div>
+        </div>
+
+        <div class="program">
+            <h2>Egyéb hasznos parancsok</h2>
+            <h3><code>Read-Host "Kérdés"</code></h3>
+            <p>Felhasználói input bekérése.</p>
+        </div>
+
+        <div class="program">
+            <h2>Tippek</h2>
+            <ul>
+                <li>Használd a <b>Tab</b> billentyűt a parancsok és változónevek automatikus kiegészítéséhez.</li>
+                <li>Használd a <code>Get-Help parancsnév</code> parancsot a súgó megtekintéséhez.</li>
+                <li>A PowerShell ISE (Integrated Scripting Environment) egy hasznos eszköz a szkriptek írásához és futtatásához. A Windows keresőjébe írva megtalálod.</li>
+                <li>A VS Code (Visual Studio Code) egy másik népszerű szerkesztő, amely támogatja a PowerShell szkriptek írását és futtatását, rengeteg bővítménnyel.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"
+        integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQuGv6qgf8+oY+fdnHolSh275nLyk+ERfg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"
+        integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSBespwFkbhA0fXlH23eXeb+i8dnl74ZpI+qgMjFFw7wY1+gBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const copyButtons = document.querySelectorAll('.copy-button');
+
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const codeBlock = button.nextElementSibling;
+                const code = codeBlock.querySelector('code').innerText;
+
+                navigator.clipboard.writeText(code)
+                    .then(() => {
+                        button.innerText = 'Másolva!';
+                        setTimeout(() => {
+                            button.innerText = 'Másolás';
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Hiba a másolás során:', err);
+                    });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
