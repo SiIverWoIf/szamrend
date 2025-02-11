@@ -1,2 +1,2 @@
 # szamrend
-szamredn
+szamrend
